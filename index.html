@@ -9,17 +9,19 @@
   <body>
     <div id="root"></div>
 
-    <script
+    <!-- <script
       crossorigin
       src="https://unpkg.com/react@18/umd/react.development.js"
     ></script>
     <script
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script>
+    ></script> -->
 
-    <script src="/App.js">
-        
+    <!-- we are removing cdn link as we have installed react and react-dom in our project -->
+
+    <script type="module" src="/App.js">
+        //module is given because normal js file has no import in it so we need to give type as module
     </script>
   </body>
 </html>
