@@ -22,6 +22,14 @@ import ReactDOM from "react-dom/client";
 
                 const RestroCard=(props)=>{
                         const {resName}=props;
+
+                        const {
+                                name,
+                                avgRating,
+                                deliveryTime,
+                                cuisines,
+                                costForTwo
+                        }=resName?.data;
                         return(
                                 <div className="restro-card" style={{backgroundColor:"#f0f0f0"}}>
                                         <img 
@@ -29,11 +37,11 @@ import ReactDOM from "react-dom/client";
                                         alt="resto image"
                                         src=""></img>
 
-                                        <h3>{resName.data.name}</h3>
-                                        <h4>{resName.data.cuisines.join(",")}</h4>
-                                        <h4>{resName.data.costForTwo / 100}</h4>
-                                        <h4>{resName.data.avgRating}</h4>
-                                        <h4>{resName.data.deliveryTime} minutes</h4>
+                                        <h3>{name}</h3>
+                                        <h4>{cuisines.join(",")}</h4>
+                                        <h4>{costForTwo / 100}</h4>
+                                        <h4>{avgRating}</h4>
+                                        <h4>{deliveryTime} minutes</h4>
                                 </div>
                         )
                 }
