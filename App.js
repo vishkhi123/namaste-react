@@ -1935,16 +1935,11 @@ import ReactDOM from "react-dom/client";
                                                 Search
                                         </div>
                                         <div className="restro-container">
-                                                {/* Restro-Container */}
-                                                <RestroCard resName={resList[0]}/>
-                                                <RestroCard resName={resList[1]}/>
-                                                <RestroCard resName={resList[2]}/>
-                                                <RestroCard resName={resList[3]}/>
-                                                <RestroCard resName={resList[4]}/>
-                                                <RestroCard resName={resList[5]}/>
-                                                <RestroCard resName={resList[6]}/>
-                                                <RestroCard resName={resList[7]}/>
-                                                <RestroCard resName={resList[8]}/>
+                                                
+                                             {resList.map((rest)=>(
+                                                <RestroCard key={rest.data.id} resName={rest}></RestroCard>
+                                             ))}  
+                                                
                                                
                                                
                                         </div>
