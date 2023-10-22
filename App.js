@@ -30,9 +30,10 @@ import ReactDOM from "react-dom/client";
                                         src=""></img>
 
                                         <h3>{resName.data.name}</h3>
-                                        <h4>{resName.data.cuisines}</h4>
-                                        <h4>34 minutes</h4>
-                                        <h4>4.4 starts</h4>
+                                        <h4>{resName.data.cuisines.join(",")}</h4>
+                                        <h4>{resName.data.costForTwo / 100}</h4>
+                                        <h4>{resName.data.avgRating}</h4>
+                                        <h4>{resName.data.deliveryTime} minutes</h4>
                                 </div>
                         )
                 }
@@ -1935,7 +1936,15 @@ import ReactDOM from "react-dom/client";
                                         </div>
                                         <div className="restro-container">
                                                 {/* Restro-Container */}
-                                                <RestroCard resName={resList}/>
+                                                <RestroCard resName={resList[0]}/>
+                                                <RestroCard resName={resList[1]}/>
+                                                <RestroCard resName={resList[2]}/>
+                                                <RestroCard resName={resList[3]}/>
+                                                <RestroCard resName={resList[4]}/>
+                                                <RestroCard resName={resList[5]}/>
+                                                <RestroCard resName={resList[6]}/>
+                                                <RestroCard resName={resList[7]}/>
+                                                <RestroCard resName={resList[8]}/>
                                                
                                                
                                         </div>
