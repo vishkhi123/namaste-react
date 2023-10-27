@@ -60,6 +60,7 @@ const Body = () => {
               console.log(searchBar);
               console.log(filteredList);
               setFilteredList(filteredList);
+              console.log(listOfRestautants?.info?.id)
             }}
           >
             Search
@@ -78,9 +79,10 @@ const Body = () => {
           Top Rated Restaurant
         </button>
       </div>
-      <div className="restro-container">
-        {filteredList.map((rest) => (
-          <RestroCard resName={rest}></RestroCard>
+      <div className="restro-container" >
+        {filteredList.map((rest) => ( 
+          <RestroCard resName={rest} key={listOfRestautants?.info?.name}  ></RestroCard>
+          
         ))}
       </div>
     </div>
