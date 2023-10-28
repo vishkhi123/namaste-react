@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RestroCard from "./RestroCard";
 import resList from "./utils/mockData";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestautants, setListOfRestaurants] = useState([]);
@@ -23,7 +24,7 @@ const Body = () => {
     console.log("fetched Successfull");
     console.log(json);
     setListOfRestaurants(
-      json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
+      json?.data.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilteredList(
@@ -39,6 +40,16 @@ const Body = () => {
       </h1>
     );
   }
+
+  const { id } = listOfRestautants.info.id;
+  console.log(id);
+
+  // const { name } = listOfRestautants?.info;
+  // if (!id) {
+  //   return <h1>Id Null</h1>;
+  // }
+  // console.log("Above name");
+  // console.log(listOfRestautants?.info?.name);
 
   return (
     <div className="body">
@@ -60,7 +71,6 @@ const Body = () => {
               console.log(searchBar);
               console.log(filteredList);
               setFilteredList(filteredList);
-              console.log(listOfRestautants?.info?.id)
             }}
           >
             Search
@@ -79,10 +89,15 @@ const Body = () => {
           Top Rated Restaurant
         </button>
       </div>
-      <div className="restro-container" >
-        {filteredList.map((rest) => ( 
-          <RestroCard resName={rest} key={listOfRestautants?.info?.name}  ></RestroCard>
-          
+      <div className="restro-container">
+        {filteredList.map((rest) => (
+          <Link
+            key={listOfRestautants.info.id}
+            to={"/restaurant/" + listOfRestautants.info.id}
+          >
+            {" "}
+            <RestroCard resName={rest}></RestroCard>{" "}
+          </Link>
         ))}
       </div>
     </div>

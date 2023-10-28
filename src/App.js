@@ -37,7 +37,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
                         element:<ContactUs/>
                 },
                 {
-                        path:"/restaurant",
+                        path:"/restaurant/:resId",
                         element:<RestaurantMenu/>
                 },
                
