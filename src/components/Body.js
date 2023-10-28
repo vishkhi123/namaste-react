@@ -41,9 +41,6 @@ const Body = () => {
     );
   }
 
-  const { id } = listOfRestautants.info.id;
-  console.log(id);
-
   // const { name } = listOfRestautants?.info;
   // if (!id) {
   //   return <h1>Id Null</h1>;
@@ -92,14 +89,17 @@ const Body = () => {
       <div className="restro-container">
         {filteredList.map((rest) => (
           <Link
-            key={listOfRestautants.info.id}
-            to={"/restaurant/" + listOfRestautants.info.id}
+            ky={rest.info.id}
+            to={"/restaurant/" + rest.info.id}
           >
-            {" "}
-            <RestroCard resName={rest}></RestroCard>{" "}
+            <RestroCard resName={rest}></RestroCard>
           </Link>
         ))}
+        {/* {filteredList.map((res)=>(
+          <RestroCard key={res?.info?.id} resName={res}/>
+        ))} */}
       </div>
+     
     </div>
   );
 };

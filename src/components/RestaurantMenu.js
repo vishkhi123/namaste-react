@@ -30,7 +30,7 @@ const RestaurantMenu = () => {
     );
   }
 
-
+//DESTRUCTURE
    const {name,cuisines,city,costForTwoMessage}=restaurantMenu?.cards[0]?.card?.card?.info;
   const {itemCards}=restaurantMenu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card;
   console.log("before info items")
