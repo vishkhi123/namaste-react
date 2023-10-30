@@ -22,7 +22,7 @@ const RestaurantMenu = () => {
     setRestaurantMenu(json.data);
   };
 
-  if (restaurantMenu.length === 0) {
+  if (restaurantMenu === null) {
     return (
       <h1>
         <Shimmer/>

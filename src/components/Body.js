@@ -33,7 +33,7 @@ const Body = () => {
     );
   };
 
-  if (listOfRestautants.length === 0) {
+  if (listOfRestautants === null) {
     return (
       <h1>
         <Shimmer></Shimmer>
