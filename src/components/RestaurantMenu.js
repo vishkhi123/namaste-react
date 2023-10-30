@@ -22,7 +22,7 @@ const RestaurantMenu = () => {
     setRestaurantMenu(json.data);
   };
 
-  if (restaurantMenu === null) {
+  if (restaurantMenu.length === 0) {
     return (
       <h1>
         <Shimmer/>
@@ -31,33 +31,37 @@ const RestaurantMenu = () => {
   }
 
 //DESTRUCTURE
+//data.cards[0].card.card.info
+//data.cards[0].card.card.info
    const {name,cuisines,city,costForTwoMessage}=restaurantMenu?.cards[0]?.card?.card?.info;
-  const {itemCards}=restaurantMenu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card;
-  console.log("before info items")
+   const {itemCards}=restaurantMenu?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card;
+   //data.cards[3].groupedCard.cardGroupMap.REGULAR.cards[3].card.card.itemCards
+  // console.log("before info items")
   
 //   const {menu}=listCards.cards
 
-if (!itemCards) {
+if (itemCards.length === 0) {
     return <div>No item cards available</div>;
   }
-console.log(itemCards)
+ console.log(itemCards)
 //  const infoName = info?.name;
  // console.log(infoName)
   return (
     <div>
       <div>
-        <h1>{name}</h1>
+        <h1>{restaurantMenu?.cards[0]?.card?.card?.info.name}</h1> 
 
-        <h3>{city}</h3>
+         <h3>{city}</h3>
         <h3>{cuisines}</h3>
         <h3>{costForTwoMessage}</h3>
       </div>
 
       <div>
+
         <h1>Menu</h1>
         <ul>
                {itemCards.map((item)=>(
-                <li key={itemCards.card.info.id}>{item.card.info.name} -price - Rs {item.card.info.price}
+                <li key={item.card.info.id}>{item.card.info.name} -price - Rs {item.card.info.price}
                     
                 </li>
                ))}
