@@ -13,7 +13,10 @@ const RestroCard = (props) => {
     cloudinaryImageId,
   } = resName?.info;
   return (
-    <div className="restro-card m-4 p-4 w-[200px] rounded-lg" style={{ backgroundColor: "#f0f0f0" }}>
+    <div
+      className="restro-card m-4 p-4 w-[200px] rounded-lg"
+      style={{ backgroundColor: "#f0f0f0" }}
+    >
       <img
         className="resto-logo rounded-lg"
         alt="resto image"
@@ -28,4 +31,20 @@ const RestroCard = (props) => {
     </div>
   );
 };
+
+export const withPromtedLabel=(RestroCard)=>{
+  return(props)=>{
+    return(
+      <div>
+        <label className="absolute bg-blue-500 text-white m-2 p-2 rounded-lg">Promoted</label>
+        <RestroCard {...props}/>
+      </div>
+    )
+  }
+}
+
+
+
+
+
 export default RestroCard;

@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import RestroCard from "./RestroCard";
+import RestroCard, { withPromtedLabel } from "./RestroCard";
 import resList from "./utils/mockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "./utils/useOnlineStatus";
 
 const Body = () => {
-
   // const onlineStatus=useOnlineStatus();
-  const onlineStatus=useOnlineStatus();
- 
+  const onlineStatus = useOnlineStatus();
 
-  if(onlineStatus ===false)
-  {
-    return(
-      <h1>Looks like you are Offline Please Check Your Internet Connection!!!!!!</h1>
-    )
+  if (onlineStatus == false) {
+    return (
+      <h1>
+        Looks like you are Offline Please Check Your Internet Connection!!!!!!
+      </h1>
+    );
   }
 
   const [listOfRestautants, setListOfRestaurants] = useState([]);
@@ -23,8 +22,8 @@ const Body = () => {
 
   const [searchBar, setSearchBar] = useState("");
 
-  
-
+  const RestaurantCardPromted = withPromtedLabel(RestroCard);
+  console.log("Promoted Cards", RestaurantCardPromted);
 
   useEffect(() => {
     fetchData();
@@ -106,12 +105,16 @@ const Body = () => {
       <div className="restro-container flex flex-wrap">
         {filteredList.map((rest) => (
           <Link key={rest.info.id} to={"/restaurant/" + rest.info.id}>
+
+          {rest.info.promoted ?(
+            <RestaurantCardPromted resName={rest}/>
+          ) : (
             <RestroCard resName={rest}></RestroCard>
+          )}
+
+            {/* <RestroCard resName={rest}></RestroCard> */}
           </Link>
         ))}
-        {/* {filteredList.map((res)=>(
-          <RestroCard key={res?.info?.id} resName={res}/>
-        ))} */}
       </div>
     </div>
   );
