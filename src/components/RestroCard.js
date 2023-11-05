@@ -13,17 +13,17 @@ const RestroCard = (props) => {
     cloudinaryImageId,
   } = resName?.info;
   return (
-    <div className="restro-card" style={{ backgroundColor: "#f0f0f0" }}>
+    <div className="restro-card m-4 p-4 w-[200px] rounded-lg" style={{ backgroundColor: "#f0f0f0" }}>
       <img
-        className="resto-logo"
+        className="resto-logo rounded-lg"
         alt="resto image"
         src={CLOUDINARYID + cloudinaryImageId}
       ></img>
-      <h3>{id}</h3>
-      <h3>{name}</h3>
-      <h4>{cuisines.join(",")}</h4>
-      <h4>{costForTwo}</h4>
-      <h4>{avgRating} rating</h4>
+      {/* <div>{id}</div> */}
+      <div className="font-bold py-2 text-lg">{name}</div>
+      <div className="flex flex-wrap">{cuisines.join(", ")}</div>
+      <div>{costForTwo}</div>
+      <div>{avgRating} rating</div>
       {/* <h4>{deliveryTime} minutes</h4> */}
     </div>
   );

@@ -47,18 +47,18 @@ if (itemCards.length === 0) {
 //  const infoName = info?.name;
  // console.log(infoName)
   return (
-    <div>
+    <div className=" m-4 p-4 bg-teal-100 w-[450px] rounded-2xl">
       <div>
-        <h1>{restaurantMenu?.cards[0]?.card?.card?.info.name}</h1> 
+        <h1 className="text-2xl font-bold">{restaurantMenu?.cards[0]?.card?.card?.info.name}</h1> 
 
          <h3>{city}</h3>
         <h3>{cuisines}</h3>
         <h3>{costForTwoMessage}</h3>
       </div>
 
-      <div>
+      <div className="m-4 p-4 bg-sky-200 w-[400px] rounded-lg">
 
-        <h1>Menu</h1>
+        <h1 className="text-xl font-bold">Menu</h1>
         <ul>
                {itemCards.map((item)=>(
                 <li key={item.card.info.id}>{item.card.info.name} -price - Rs {item.card.info.price}
