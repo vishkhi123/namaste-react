@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import { MENU_URL } from "./utils/constants";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const [restaurantMenu, setRestaurantMenu] = useState([]);
+ // const[categories,setCategories]=useState([]);
 
-  const {resId}=useParams();
+  const { resId } = useParams();
   console.log(resId);
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-     MENU_URL +resId
-    );
+    const data = await fetch(MENU_URL + resId);
     const json = await data.json();
-    console.log("fetched Successfull")
+    console.log("fetched Successfull");
     console.log(json);
     setRestaurantMenu(json.data);
   };
@@ -25,51 +25,45 @@ const RestaurantMenu = () => {
   if (restaurantMenu.length === 0) {
     return (
       <h1>
-        <Shimmer/>
+        <Shimmer />
       </h1>
     );
   }
 
-//DESTRUCTURE
-//data.cards[0].card.card.info
-//data.cards[0].card.card.info
-   const {name,cuisines,city,costForTwoMessage}=restaurantMenu?.cards[0]?.card?.card?.info;
-   const {itemCards}=restaurantMenu?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card;
-   //data.cards[3].groupedCard.cardGroupMap.REGULAR.cards[3].card.card.itemCards
-  // console.log("before info items")
+  //DESTRUCTURE
+  //data.cards[0].card.card.info
+  //data.cards[0].card.card.info
+  //For Restaurant Name
+  const { name, cuisines, city, costForTwoMessage } =
+    restaurantMenu?.cards[0]?.card?.card?.info;
+ 
+    //Filtered  Restaurant to show Menu
+    let categories=restaurantMenu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=>c.card?.card?.["@type"]=="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
+
+    if(categories == null)
+    {
+      categories=restaurantMenu?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=>c.card?.card?.["@type"]=="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
+    }
+
+    console.log("Array Data")
+    console.log(categories)
   
-//   const {menu}=listCards.cards
-
-if (itemCards.length === 0) {
-    return <div>No item cards available</div>;
-  }
- console.log(itemCards)
-//  const infoName = info?.name;
- // console.log(infoName)
   return (
-    <div className=" m-4 p-4 bg-teal-100 w-[450px] rounded-2xl">
-      <div>
-        <h1 className="text-2xl font-bold">{restaurantMenu?.cards[0]?.card?.card?.info.name}</h1> 
+    <div className="text-center">
+      
+        <h1 className="text-2xl font-bold my-6">{name}</h1>
+        <h3>{city}</h3>
+        <p className="font-bold text-lg">{cuisines.join(", ")} - {costForTwoMessage}</p>
 
-         <h3>{city}</h3>
-        <h3>{cuisines}</h3>
-        <h3>{costForTwoMessage}</h3>
+      {categories.map((cat)=>(
+        <RestaurantCategory key={cat?.card?.card?.title} data={cat?.card?.card}></RestaurantCategory>
+      ))}
+
+
+
       </div>
 
-      <div className="m-4 p-4 bg-sky-200 w-[400px] rounded-lg">
-
-        <h1 className="text-xl font-bold">Menu</h1>
-        <ul>
-               {itemCards.map((item)=>(
-                <li key={item.card.info.id}>{item.card.info.name} -price - Rs {item.card.info.price}
-                    
-                </li>
-               ))}
-        </ul>
-
-        <h3></h3>
-      </div>
-    </div>
+   
   );
 };
 export default RestaurantMenu;

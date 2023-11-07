@@ -8,8 +8,9 @@ import useOnlineStatus from "./utils/useOnlineStatus";
 const Body = () => {
   // const onlineStatus=useOnlineStatus();
   const onlineStatus = useOnlineStatus();
+  console.log(" Online Status :" + onlineStatus)
 
-  if (onlineStatus == false) {
+  if (onlineStatus === false) {
     return (
       <h1>
         Looks like you are Offline Please Check Your Internet Connection!!!!!!
@@ -23,7 +24,7 @@ const Body = () => {
   const [searchBar, setSearchBar] = useState("");
 
   const RestaurantCardPromted = withPromtedLabel(RestroCard);
-  console.log("Promoted Cards", RestaurantCardPromted);
+  //console.log("Promoted Cards" + RestaurantCardPromted);
 
   useEffect(() => {
     fetchData();
@@ -31,7 +32,9 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=19.9615398&lng=79.2961468"
+       "https://www.swiggy.com/mapi/homepage/getCards?lat=19.9615398&lng=79.2961468"
+      //"https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.9615398&lng=79.2961468&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      
     );
 
     const json = await data.json();

@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 
 const useOnlineStatus = () => {
   const [onlineStatus, setOnlineStatus] = useState(true);
-
-  //check if online or offLine
-
+//check if online or offLine
   useEffect(() => {
     window.addEventListener("offline", () => {
       setOnlineStatus(false);
@@ -13,6 +11,8 @@ const useOnlineStatus = () => {
       setOnlineStatus(true);
     });
   }, []);
+
   return onlineStatus;
 };
+
 export default useOnlineStatus;
