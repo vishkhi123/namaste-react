@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestroCard, { withPromtedLabel } from "./RestroCard";
 import resList from "./utils/mockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "./utils/useOnlineStatus";
+import UserContext from "./utils/UserContext";
 
 const Body = () => {
+
+  const {loggedInUser,setUserName}=useContext(UserContext);
   // const onlineStatus=useOnlineStatus();
   const onlineStatus = useOnlineStatus();
   console.log(" Online Status :" + onlineStatus)
@@ -32,8 +35,8 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-       "https://www.swiggy.com/mapi/homepage/getCards?lat=19.9615398&lng=79.2961468"
-      //"https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.9615398&lng=79.2961468&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      // "https://www.swiggy.com/mapi/homepage/getCards?lat=19.9615398&lng=79.2961468"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.6040278&lng=73.7328891"
       
     );
 
@@ -42,16 +45,15 @@ const Body = () => {
     console.log("fetched Successfull");
     console.log(json);
     setListOfRestaurants(
-      json?.data.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-        ?.restaurants
+      // json?.data.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredList(
-      json?.data.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-        ?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
-  if (listOfRestautants === null) {
+  if (listOfRestautants == null) {
     return (
       <h1>
         <Shimmer></Shimmer>
@@ -90,19 +92,27 @@ const Body = () => {
           >
             Search
           </button>
+
+          
         </div>
         <div className="">
           <button
-            className="filter-btn bg-gray-200  p-2 rounded-lg"
+            className="filter-btn bg-gray-200  p-2 m-2 rounded-lg"
             onClick={() => {
               const filterdList = listOfRestautants.filter(
-                (res) => res.info.avgRating > 4
+                (res) => res.info.avgRating > 3
               );
               setListOfRestaurants(filterdList);
             }}
           >
             Top Rated Restaurant
           </button>
+
+            <label className="font-bold">Live Change : </label>
+          <input className="p-1 m-2 border border-black rounded-lg" 
+            value={loggedInUser}
+            onChange={(e)=>setUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="restro-container flex flex-wrap">
