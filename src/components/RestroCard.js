@@ -14,8 +14,8 @@ const RestroCard = (props) => {
   } = resName?.info;
   return (
     <div
-      className="restro-card m-4 p-4 w-[200px] rounded-lg"
-      style={{ backgroundColor: "#f0f0f0" }}
+      className="restro-card m-4 p-4 w-[200px] rounded-lg bg-gray-100 hover:bg-gray-200"
+      
     >
       <img
         className="resto-logo rounded-lg"
