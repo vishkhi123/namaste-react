@@ -1,6 +1,15 @@
+import { useDispatch } from "react-redux";
 import { CLOUDINARYID } from "./utils/constants";
+import { addItem } from "./utils/cartSlice";
 
 const ItemList = ({ items }) => {
+
+    const dispatch=useDispatch();
+
+    const handelAddItem=(item)=>{
+      dispatch(addItem(item));
+    }
+
   return (
     <div>
       {items.map((item) => (
@@ -22,7 +31,9 @@ const ItemList = ({ items }) => {
           </div>
           <div className="w-3/12 p-4">
             <div className="absolute">
-              <button className="p-2 mx-16 rounded-lg bg-black text-white shadow-lg">
+              <button className="p-2 mx-16 rounded-lg bg-black text-white shadow-lg"
+              onClick={()=>handelAddItem(item)}
+              >
                 Add +
               </button>
             </div>
